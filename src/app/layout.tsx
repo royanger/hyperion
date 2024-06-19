@@ -19,9 +19,12 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <header>
+          <header className="flex justify-between">
+            <div className="flex">
+              <h1>Hyperion</h1>
+              <OrganizationSwitcher />
+            </div>
             <UserButton />
-            <OrganizationSwitcher hidePersonal />
           </header>
           {children}
         </body>

@@ -7,7 +7,7 @@ export default function Page() {
   if (!orgId) {
     return (
       <div className="flex justify-center p-5">
-        <OrganizationList hidePersonal />
+        <OrganizationList />
       </div>
     )
   }
