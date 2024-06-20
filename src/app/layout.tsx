@@ -22,7 +22,7 @@ export default function RootLayout({
           <header className="flex justify-between">
             <div className="flex">
               <h1>Hyperion</h1>
-              <OrganizationSwitcher />
+              <OrganizationSwitcher hidePersonal />
             </div>
             <SignedOut>
               <SignInButton />

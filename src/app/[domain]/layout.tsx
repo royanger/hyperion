@@ -10,9 +10,9 @@ export default function Layout({
   children: ReactNode;
 }) {
 
-  if (params.domain !== "bookercodes") {
-    notFound()
-  }
+  // if (params.domain !== "bookercodes") {
+  //   notFound()
+  // }
 
   return (
     <div>
