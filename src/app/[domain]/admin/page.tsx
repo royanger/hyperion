@@ -1,14 +1,34 @@
-import { auth } from "@clerk/nextjs/server"
+import { revalidatePath } from "next/cache"
+import { db } from '@/db';
+import { postsTable } from '@/schema';
+import { auth } from "@clerk/nextjs/server";
 
-export default async function Page() {
 
-  const { userId, orgId, orgSlug, sessionClaims } = auth()
-  const username = sessionClaims?.username
+export default function Page() {
+  async function createPost(formData: FormData) {
+    "use server"
+    const title = formData.get("title") as string
+    const content = formData.get("content") as string
+
+    const { userId, orgId } = auth()
+
+    await db.insert(postsTable).values({
+      title,
+      content,
+      orgId: orgId as string,
+      userId: userId as string
+    })
+
+    revalidatePath("/post")
+  }
 
   return (
     <div>
-      <p>User: {userId} ({username})</p>
-      <p>Org: {orgId} ({orgSlug})</p>
+      <form action={createPost}>
+        <input name="title" type="text" />
+        <input name="content" type="text" />
+        <button type="submit">Create</button>
+      </form>
     </div>
   )
 }
