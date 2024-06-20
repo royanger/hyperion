@@ -10,11 +10,12 @@ export default function Page() {
     const title = formData.get("title") as string
     const content = formData.get("content") as string
 
-    const { userId } = auth()
+    const { userId, orgId } = auth()
 
     await db.insert(postsTable).values({
       title,
       content,
+      orgId: orgId as string,
       userId: userId as string
     })
 

@@ -5,11 +5,21 @@ export const postsTable = pgTable('posts_table', {
   title: text('title').notNull(),
   content: text('content').notNull(),
   userId: text('user_id').notNull(),
+  orgId: text('org_id')
+    .notNull()
+    .references(() => orgsTable.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at')
     .notNull()
     .$onUpdate(() => new Date()),
 });
 
+export const orgsTable = pgTable('orgs_table', {
+  id: text('id').primaryKey(),
+  slug: text('slug').notNull()
+})
+
 export type InsertPost = typeof postsTable.$inferInsert;
 export type SelectPost = typeof postsTable.$inferSelect;
+export type InsertOrg = typeof orgsTable.$inferInsert;
+export type SelectOrg = typeof orgsTable.$inferSelect;
