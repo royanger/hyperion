@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ClerkProvider, OrganizationSwitcher, UserButton } from "@clerk/nextjs";
+import { ClerkProvider, OrganizationSwitcher, SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +24,12 @@ export default function RootLayout({
               <h1>Hyperion</h1>
               <OrganizationSwitcher />
             </div>
-            <UserButton />
+            <SignedOut>
+              <SignInButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </header>
           {children}
         </body>
