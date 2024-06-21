@@ -16,7 +16,7 @@ export const postsTable = pgTable('posts_table', {
 
 export const orgsTable = pgTable('orgs_table', {
   id: text('id').primaryKey(),
-  slug: text('slug').notNull()
+  slug: text('slug').unique().notNull()
 })
 
 export type InsertPost = typeof postsTable.$inferInsert;
