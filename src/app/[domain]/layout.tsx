@@ -18,7 +18,6 @@ export default async function Layout({
     .from(orgsTable)
     .where(eq(orgsTable.slug, params.domain))
 
-  log('org', org)
   if (!org)
     notFound()
 
