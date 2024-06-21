@@ -2,7 +2,7 @@ import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
 import { db } from '@/db';
-import { orgsTable } from '@/schema';
+import { orgsTable, usersTable } from '@/schema';
 import { eq } from 'drizzle-orm';
 
 export async function POST(req: Request) {
@@ -69,6 +69,28 @@ export async function POST(req: Request) {
       case "organization.deleted":
         await db.delete(orgsTable)
           .where(eq(orgsTable.id, data.id as string))
+        break
+      case "user.created":
+        await db.insert(usersTable)
+          .values({
+            id: data.id,
+            firstName: data.first_name as string,
+            lastName: data.last_name as string,
+            imgUrl: data.image_url
+          })
+        break
+      case "user.updated":
+        await db.update(usersTable)
+          .set({
+            firstName: data.first_name as string,
+            lastName: data.last_name as string,
+            imgUrl: data.image_url
+          })
+          .where(eq(usersTable.id, data.id as string));
+        break
+      case "user.deleted":
+        await db.delete(usersTable)
+          .where(eq(usersTable.id, data.id as string))
         break
       default:
         return new Response('', { status: 501 })
