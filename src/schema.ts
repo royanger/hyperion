@@ -3,6 +3,7 @@ import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 export const postsTable = pgTable('posts_table', {
   id: serial('id').primaryKey(),
   title: text('title').notNull(),
+  // need to enforce slug is not "admin" because that would conflict with the "/admin" path
   slug: text('slug').unique().notNull(),
   content: text('content').notNull(),
   userId: text('user_id')
