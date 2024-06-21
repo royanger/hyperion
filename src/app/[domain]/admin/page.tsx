@@ -13,10 +13,10 @@ export default function Page() {
   const { orgSlug } = useAuth()
 
 
-  useEffect(() => {
-    // console.log('orgSlug changed')
-    router.push(`/${orgSlug}/admin`)
-  }, [orgSlug])
+  // useEffect(() => {
+  // console.log('orgSlug changed')
+  //   router.push(`/${orgSlug}/admin`)
+  // }, [orgSlug])
 
   return (
     <div>
