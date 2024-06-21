@@ -11,7 +11,8 @@ export default function Page() {
     const { userId, orgId } = auth()
 
     await db.insert(postsTable).values({
-      title,
+      title: title,
+      slug: title.toLocaleLowerCase().replace(' ', '-'),
       content,
       orgId: orgId as string,
       userId: userId as string

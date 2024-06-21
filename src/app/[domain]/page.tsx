@@ -2,6 +2,7 @@ import { db } from "@/db";
 import { orgsTable, postsTable, usersTable } from "@/schema";
 import { notFound } from "next/navigation";
 import { eq } from "drizzle-orm";
+import Link from "next/link";
 
 export default async function Page({
   params,
@@ -19,7 +20,7 @@ export default async function Page({
     <div>
       <ul>
         {posts.map(post => {
-          return <li>{post.posts_table.title} by {post.users_table?.firstName}</li>
+          return <li><Link href={`/${params.domain}/${post.posts_table.slug}`}>{post.posts_table.title} by {post.users_table?.firstName}</Link></li>
         })}
       </ul>
     </div>
