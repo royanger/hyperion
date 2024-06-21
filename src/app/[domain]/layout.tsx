@@ -22,6 +22,7 @@ export default async function Layout({
   if (!org)
     notFound()
 
+
   return (
     <div>
       {children}

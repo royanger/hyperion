@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <h1>Choose org</h1>
-      <OrganizationList />
+      <OrganizationList hidePersonal />
     </>
   );
 }
