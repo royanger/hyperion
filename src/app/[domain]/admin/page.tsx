@@ -1,23 +1,23 @@
+'use client'
+
+import { createPost } from "@/actions"
 import { db } from "@/db"
 import { postsTable } from "@/schema"
-import { auth } from "@clerk/nextjs/server"
+import { useAuth } from "@clerk/nextjs";
+import { useEffect } from "react"
+import { useRouter } from 'next/navigation'
+
 
 export default function Page() {
-  async function createPost(formData: FormData) {
-    "use server"
-    const title = formData.get("title") as string
-    const content = formData.get("content") as string
+  const router = useRouter()
+  const { orgSlug } = useAuth()
 
-    const { userId, orgId } = auth()
 
-    await db.insert(postsTable).values({
-      title: title,
-      slug: title.toLocaleLowerCase().replace(' ', '-'),
-      content,
-      orgId: orgId as string,
-      userId: userId as string
-    })
-  }
+  useEffect(() => {
+    // console.log('orgSlug changed')
+    router.push(`/${orgSlug}/admin`)
+  }, [orgSlug])
+
   return (
     <div>
       <form action={createPost}>
