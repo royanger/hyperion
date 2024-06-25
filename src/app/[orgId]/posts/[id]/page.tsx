@@ -5,19 +5,19 @@ import { eq } from "drizzle-orm";
 export default async function Page({
   params,
 }: {
-  params: { domain: string; postSlug: string };
+  params: { orgId: string; id: string };
 }) {
 
   const [post] = await db.select()
     .from(postsTable)
     .leftJoin(usersTable, eq(postsTable.userId, usersTable.id))
-    .where(eq(postsTable.slug, params.postSlug))
+    .where(eq(postsTable.id, params.id))
   console.log("post", post)
 
   return (
     <div>
-      <p>Domain: {params.domain} </p>
-      <p>Slug: {params.postSlug}</p>
+      <p>Domain: {params.orgId} </p>
+      <p>Slug: {params.id}</p>
       <p>Title: {post.posts_table.title}</p>
       <p>Content: {post.posts_table.content}</p>
       <p>Author: {post.users_table?.firstName} {post.users_table?.lastName}</p>
