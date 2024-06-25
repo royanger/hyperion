@@ -10,17 +10,16 @@ export default async function Layout({
   params,
   children,
 }: {
-  params: { domain: string };
+  params: { orgId: string };
   children: ReactNode;
 }) {
 
   const [org] = await db.select()
     .from(orgsTable)
-    .where(eq(orgsTable.slug, params.domain))
+    .where(eq(orgsTable.id, params.orgId))
 
   if (!org)
     notFound()
-
 
   return (
     <div>

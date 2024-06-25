@@ -14,7 +14,7 @@ export default async function Page({
     .from(postsTable)
     .leftJoin(orgsTable, eq(postsTable.orgId, orgsTable.id))
     .leftJoin(usersTable, eq(postsTable.userId, usersTable.id))
-    .where(eq(orgsTable.slug, params.domain))
+    .where(eq(orgsTable.id, params.domain))
 
   return (
     <div>

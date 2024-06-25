@@ -17,6 +17,6 @@ export default function Page() {
       </div>
     )
   } else {
-    redirect(`/${orgSlug}/admin`)
+    redirect(`/${orgId}/admin`)
   }
 }
