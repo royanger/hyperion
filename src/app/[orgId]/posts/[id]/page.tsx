@@ -5,7 +5,7 @@ import { eq } from "drizzle-orm";
 export default async function Page({
   params,
 }: {
-  params: { orgId: string; id: string };
+  params: { orgId: string; id: number };
 }) {
 
   const [post] = await db.select()
