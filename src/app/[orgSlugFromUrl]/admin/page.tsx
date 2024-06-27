@@ -11,7 +11,7 @@ export default async function Page({
   params: { orgSlugFromUrl: string };
 }) {
   // if the URL does not match the active Org, redirect the user
-  const { orgId, orgSlug } = auth();
+  const { orgSlug } = auth();
 
   if (orgSlug !== params.orgSlugFromUrl) {
     console.log(
